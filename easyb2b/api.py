@@ -6,24 +6,23 @@ API_KEY = os.getenv('EASYB2B_API_KEY')
     
 
 class EasyB2B(object):
+    _mocked = False
+    sess = None
     base_url = "https://b2b.eazymobile.ng/api/live"
-    headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    }
     alphnum = [chr(i) for i in range(48, 58)] + [chr(i) for i in range(65, 91)] + [chr(i) for i in range(97, 123)]
     datetime = datetime.now 
-    post = requests.post
-
-    _mocked = False
 
     def __init__(self, api_key:str = None) -> None:
+        self.req_session = requests.session()
+        self.req_session.headers['Content-Type'] = 'application/json'
+        self.req_session.headers['Accept'] = 'application/json'
+        self.mocked = False
         if API_KEY:
-            self.headers['Authorization'] = f'Bearer {API_KEY}'
+            self.req_session.headers['Authorization'] = f'Bearer {API_KEY}'
         elif api_key:
-            self.headers['Authorization'] = f'Bearer {api_key}'
+            self.req_session.headers['Authorization'] = f'Bearer {api_key}'
         else:
-            self.headers['Authorization'] = f'Bearer Demo'
+            self.req_session.headers['Authorization'] = f'Bearer Demo'
             self.mocked = True
 
     @property
@@ -35,9 +34,9 @@ class EasyB2B(object):
         if not isinstance(val, bool):
             raise ValueError("property mocked must be a boolean value!")
         if val:
-            self.post = MockedRequests()
+            self.sess = MockedRequests(session=self.req_session)
         else:
-            self.post = requests.post
+            self.sess = self.req_session
         self._mocked = val
 
     def get_reference(self):
@@ -49,7 +48,7 @@ class EasyB2B(object):
         url = f'{self.base_url}/v1/load/wallet-balance'
         data = {'email': email}
         data.update(**kwargs)
-        response = self.post(url=url, headers=self.headers, json=data)
+        response = self.sess.post(url, json=data)
         assert response.status_code == 200
         return response.json()
 
@@ -63,7 +62,7 @@ class EasyData(EasyB2B):
         url = f'{self.base_url}/v1/topup/load/networks'
         data = {'networks': networks}
         data.update(**kwargs)
-        response = self.post(url=url, headers=self.headers, json=data)
+        response = self.sess.post(url, json=data)
         assert response.status_code == 200
         return response.json()
     
@@ -71,7 +70,7 @@ class EasyData(EasyB2B):
         url = f'{self.base_url}/v1/topup/load/data-types'
         data = {'network': str(network)}
         data.update(**kwargs)
-        response = self.post(url=url, headers=self.headers, json=data)
+        response = self.sess.post(url, json=data)
         assert response.status_code == 200
         return response.json()
     
@@ -79,7 +78,7 @@ class EasyData(EasyB2B):
         url = f'{self.base_url}/v1/topup/load/data'
         data = {'network': str(network), 'dataType': dataType}
         data.update(**kwargs)
-        response = self.post(url=url, headers=self.headers, json=data)
+        response = self.sess.post(url, json=data)
         assert response.status_code == 200
         return response.json()
     
@@ -92,11 +91,11 @@ class EasyData(EasyB2B):
             "phone": phone,
             "reference": self.get_reference()
         }
-        response = self.post(url=url, headers=self.headers, json=data)
+        response = self.sess.post(url, json=data)
         assert response.status_code == 200
         return response.json()
 
 
 if __name__ == "__main__":
-    client = EasyData()
-    print(client.get_networks(), client.get_data_types(), client.get_data_plans(), client.get_wallet_balance(), client.purchase_data(), sep='\n')
+    client = EasyData(api_key="live_381d1ce9f6a64ef6a59840849a1b75469m323319")
+    print(client.get_data_plans(),sep='\n')

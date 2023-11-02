@@ -113,15 +113,21 @@ class MockedRequests(object):
             },
             "time": "2023-28-06 09:42:16"
         }
+    
+    def __init__(self, session=None) -> None:
+        if session:
+            self.headers:dict = session.headers
 
-    def __call__(self, url, data=None, json=None, **kwargs):
+    def post(self, url, data=None, json=None, **kwargs):
         assert isinstance(json, dict)
-        assert 'Content-Type' in kwargs['headers'].keys()
-        assert 'Accept' in kwargs['headers'].keys()
-        assert 'Authorization' in kwargs['headers'].keys()
-        assert kwargs['headers']['Content-Type'] == 'application/json'
-        assert kwargs['headers']['Accept'] == 'application/json'
-        assert 'Bearer ' in kwargs['headers']['Authorization']
+        if 'headers' in kwargs:
+            self.headers.update(**kwargs["headers"])
+        assert 'Content-Type' in self.headers.keys()
+        assert 'Accept' in self.headers.keys()
+        assert 'Authorization' in self.headers.keys()
+        assert self.headers['Content-Type'] == 'application/json'
+        assert self.headers['Accept'] == 'application/json'
+        assert 'Bearer ' in self.headers['Authorization']
         for obj in self.urls:
             if url not in  obj[0]:
                 continue
