@@ -97,5 +97,4 @@ class EasyData(EasyB2B):
 
 
 if __name__ == "__main__":
-    client = EasyData(api_key="live_381d1ce9f6a64ef6a59840849a1b75469m323319")
-    print(client.get_data_plans(),sep='\n')
+    pass
