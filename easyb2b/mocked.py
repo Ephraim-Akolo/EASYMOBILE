@@ -21,98 +21,13 @@ class MockedRequests(object):
             }
         }
     
-    get_networks_data_mocked_response = {
-            "status": True,
-            "code": 200,
-            "data": {
-                "product": [
-                    {
-                        "network": "MTN",
-                        "networkId": 1
-                    },
-                    {
-                        "network": "AIRTEL",
-                        "networkId": 2
-                    },
-                    {
-                        "network": "GLO",
-                        "networkId": 3
-                    },
-                    {
-                        "network": "9MOBILE",
-                        "networkId": 4
-                    }
-                ]
-            }
-        }
+    get_networks_data_mocked_response = {'status': True, 'code': 200, 'data': {'product': [{'network': 'MTN', 'networkId': 1}, {'network': 'AIRTEL', 'networkId': 2}, {'network': 'GLO', 'networkId': 3}, {'network': '9MOBILE', 'networkId': 4}]}}
     
-    get_data_types_mocked_response = {
-            "status": True,
-            "code": 200,
-            "data": {
-                "product": [
-                    {
-                        "network": "MTN",
-                        "networkId": 1,
-                        "name": "SME"
-                    },
-                    {
-                        "network": "MTN",
-                        "networkId": 1,
-                        "name": "CORPORATE GIFTING"
-                    },
-                    {
-                        "network": "MTN",
-                        "networkId": 1,
-                        "name": "DIRECT GIFTING"
-                    },
-                    {
-                        "network": "MTN",
-                        "networkId": 1,
-                        "name": "NORMAL GIFTING"
-                    }
-                ]
-            }
-        }
+    get_data_types_mocked_response ={'status': True, 'code': 200, 'data': {'product': [{'network': 'MTN', 'networkId': 1, 'name': 'SME'}, {'network': 'MTN', 'networkId': 1, 'name': 'CORPORATE GIFTING'}, {'network': 'MTN', 'networkId': 1, 'name': 'DIRECT GIFTING'}, {'network': 'MTN', 'networkId': 1, 'name': 'NORMAL GIFTING'}]}}
     
-    get_data_plans_mocked_response = {
-            "status": True,
-            "code": 200,
-            "data": {
-                "product": [
-                    {
-                        "network": "MTN",
-                        "networkId": 1,
-                        "name": "SME"
-                    },
-                    {
-                        "network": "MTN",
-                        "networkId": 1,
-                        "name": "CORPORATE GIFTING"
-                    },
-                    {
-                        "network": "MTN",
-                        "networkId": 1,
-                        "name": "DIRECT GIFTING"
-                    },
-                    {
-                        "network": "MTN",
-                        "networkId": 1,
-                        "name": "NORMAL GIFTING"
-                    }
-                ]
-            }
-        }
+    get_data_plans_mocked_response = {'status': True, 'code': 200, 'data': {'product': [{'network': 'MTN', 'planName': '500MB [SME] - 30 DAYS', 'planId': '1', 'price': '140', 'status': 'AVAILABLE'}, {'network': 'MTN', 'planName': '1GB [SME] - 30 DAYS', 'planId': '2', 'price': '240', 'status': 'AVAILABLE'}, {'network': 'MTN', 'planName': '2GB [SME] - 30 DAYS', 'planId': '3', 'price': '480', 'status': 'AVAILABLE'}, {'network': 'MTN', 'planName': '3GB [SME] - 30 DAYS', 'planId': '4', 'price': '720', 'status': 'AVAILABLE'}, {'network': 'MTN', 'planName': '5GB [SME] - 30 DAYS', 'planId': '5', 'price': '1200', 'status': 'AVAILABLE'}, {'network': 'MTN', 'planName': '10GB [SME] - 30 DAYS', 'planId': '6', 'price': '2400', 'status': 'AVAILABLE'}]}}
 
-    purchase_data_mocked_response = {
-            "status": True,
-            "code": 200,
-            "data": {
-                "message": "Dear Customer, You have successfully shared 500MB Data to 23481663****2. 9961.07 31\\/08\\/2023. Thankyou",
-                "reference": "WPY20232806094208VBLWM308"
-            },
-            "time": "2023-28-06 09:42:16"
-        }
+    purchase_data_mocked_response = {'status': True, 'code': 200, 'data': {'message': 'Dear Customer, You have successfully shared 500MB Data to 2348168639113. Your SME data balance is 26648.71GB expires 08/02/2024. Thankyou', 'reference': 'EZM20230311083236YLURDN36'}, 'time': '2023-03-11 08:32:39'}
     
     def __init__(self, session=None) -> None:
         if session:

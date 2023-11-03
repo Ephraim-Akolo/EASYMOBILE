@@ -10,7 +10,6 @@ class EasyB2B(object):
     sess = None
     base_url = "https://b2b.eazymobile.ng/api/live"
     alphnum = [chr(i) for i in range(48, 58)] + [chr(i) for i in range(65, 91)] + [chr(i) for i in range(97, 123)]
-    datetime = datetime.now 
 
     def __init__(self, api_key:str = None) -> None:
         self.req_session = requests.session()
@@ -39,10 +38,10 @@ class EasyB2B(object):
             self.sess = self.req_session
         self._mocked = val
 
-    def get_reference(self):
-        date = self.datetime()
-        code = ''.join(random.sample(self.alphnum, 18))
-        return f"{date.year}{date.month:02}{date.day:02}{date.hour:02}{date.minute:02}{code}"
+    def get_reference(self, code_len=16):
+        date = datetime.now().strftime("%Y%m%d%I%M")
+        code = ''.join(random.sample(self.alphnum, code_len))
+        return f"{date}{code}"
     
     def get_wallet_balance(self, email='example@email.com', **kwargs):
         url = f'{self.base_url}/v1/load/wallet-balance'
@@ -82,7 +81,7 @@ class EasyData(EasyB2B):
         assert response.status_code == 200
         return response.json()
     
-    def purchase_data(self, network=1, dataType='SME', planId='500MB_SME', phone='08168639113'):
+    def purchase_data(self, network=1, dataType='SME', planId='1', phone='08168639113'):
         url = f'{self.base_url}/v1/topup/data'
         data = {
             "network": str(network),
