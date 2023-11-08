@@ -6,8 +6,11 @@ class MockedRequests(object):
     urls = (
         ((f'{base_url}/live/v1/load/wallet-balance', f"{base_url}/test/v1/load/wallet-balance"), "get_wallet_balance_mocked_response"),
         ((f'{base_url}/live/v1/topup/load/networks', f'{base_url}/test/v1/topup/load/networks'), "get_networks_data_mocked_response"),
+        ((f'{base_url}/live/v1/topup/load/airtime-types', f'{base_url}test/v1/topup/load/airtime-types'), "get_airtime_types_mocked_response"),
         ((f'{base_url}/live/v1/topup/load/data-types', f'{base_url}test/v1/topup/load/data-types'), "get_data_types_mocked_response"),
+        ((f'{base_url}/live/v1/topup/load/airtime-rate', f'{base_url}test/v1/topup/load/airtime-rate'), "get_airtime_rates_mocked_response"),
         ((f'{base_url}/live/v1/topup/load/data', f'{base_url}test/v1/topup/load/data'), "get_data_plans_mocked_response"),
+        ((f"{base_url}/live/v1/topup/airtime", f"{base_url}/test/v1/topup/airtime"), "purchase_airtime_mocked_response"),
         ((f"{base_url}/live/v1/topup/data", f"{base_url}/test/v1/topup/data"), "purchase_data_mocked_response"),
         )
     
@@ -23,9 +26,15 @@ class MockedRequests(object):
     
     get_networks_data_mocked_response = {'status': True, 'code': 200, 'data': {'product': [{'network': 'MTN', 'networkId': 1}, {'network': 'AIRTEL', 'networkId': 2}, {'network': 'GLO', 'networkId': 3}, {'network': '9MOBILE', 'networkId': 4}]}}
     
+    get_airtime_types_mocked_response = {'status': True, 'code': 200, 'data': {'product': [{'network': 'MTN', 'networkId': 1, 'name': 'VTU'}, {'network': 'MTN', 'networkId': 1, 'name': 'SNS'}, {'network': 'MTN', 'networkId': 1, 'name': 'AWOOF4U'}, {'network': 'MTN', 'networkId': 1, 'name': 'GARABASA'}]}}
+
     get_data_types_mocked_response ={'status': True, 'code': 200, 'data': {'product': [{'network': 'MTN', 'networkId': 1, 'name': 'SME'}, {'network': 'MTN', 'networkId': 1, 'name': 'CORPORATE GIFTING'}, {'network': 'MTN', 'networkId': 1, 'name': 'DIRECT GIFTING'}, {'network': 'MTN', 'networkId': 1, 'name': 'NORMAL GIFTING'}]}}
     
+    get_airtime_rates_mocked_response = {'status': True, 'code': 200, 'data': {'product': {'rate': '97%'}}}
+
     get_data_plans_mocked_response = {'status': True, 'code': 200, 'data': {'product': [{'network': 'MTN', 'planName': '500MB [SME] - 30 DAYS', 'planId': '1', 'price': '140', 'status': 'AVAILABLE'}, {'network': 'MTN', 'planName': '1GB [SME] - 30 DAYS', 'planId': '2', 'price': '240', 'status': 'AVAILABLE'}, {'network': 'MTN', 'planName': '2GB [SME] - 30 DAYS', 'planId': '3', 'price': '480', 'status': 'AVAILABLE'}, {'network': 'MTN', 'planName': '3GB [SME] - 30 DAYS', 'planId': '4', 'price': '720', 'status': 'AVAILABLE'}, {'network': 'MTN', 'planName': '5GB [SME] - 30 DAYS', 'planId': '5', 'price': '1200', 'status': 'AVAILABLE'}, {'network': 'MTN', 'planName': '10GB [SME] - 30 DAYS', 'planId': '6', 'price': '2400', 'status': 'AVAILABLE'}]}}
+
+    purchase_airtime_mocked_response = {'status': True, 'code': 200, 'data': {'message': 'SUCCESSFUL', 'reference': 'EZM20230811025911PIY3BD11'}, 'time': '2023-08-11 02:59:13'}
 
     purchase_data_mocked_response = {'status': True, 'code': 200, 'data': {'message': 'Dear Customer, You have successfully shared 500MB Data to 2348168639113. Your SME data balance is 26648.71GB expires 08/02/2024. Thankyou', 'reference': 'EZM20230311083236YLURDN36'}, 'time': '2023-03-11 08:32:39'}
     
