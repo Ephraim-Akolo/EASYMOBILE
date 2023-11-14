@@ -45,4 +45,13 @@ class EasyB2B(object):
         response = self.sess.post(url, json=data, timeout=self.timeout)
         assert response.status_code == 200
         return response.json()
+    
+    def get_transaction_status(self, name, ref:str):
+        url = f'{self.base_url}/v1/transaction/status/{name}'
+        data = {
+            "reference": ref
+        }
+        response = self.sess.post(url, json=data, timeout=self.timeout)
+        assert response.status_code == 200
+        return response.json()
 

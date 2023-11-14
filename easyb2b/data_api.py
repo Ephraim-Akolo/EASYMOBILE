@@ -41,6 +41,9 @@ class EasyData(EasyB2B):
         response = self.sess.post(url, json=data, timeout=self.timeout)
         assert response.status_code == 200
         return response.json()
+    
+    def get_transaction_status(self, ref: str):
+        return super().get_transaction_status('data', ref)
 
 
 if __name__ == "__main__":

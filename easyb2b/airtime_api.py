@@ -41,6 +41,9 @@ class EasyAirtime(EasyB2B):
         response = self.sess.post(url, json=data, timeout=self.timeout)
         assert response.status_code == 200
         return response.json()
+    
+    def get_transaction_status(self, ref: str):
+        return super().get_transaction_status('airtime', ref)
 
 
 if __name__ == "__main__":
