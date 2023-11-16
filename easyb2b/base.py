@@ -8,7 +8,7 @@ class EasyB2B(object):
     _mocked = False
     sess = None
     base_url = "https://b2b.eazymobile.ng/api/live"
-    timeout = 6.1
+    timeout = 45.1
 
     def __init__(self, api_key:str = None, timeout=None) -> None:
         if timeout: self.timeout = timeout
