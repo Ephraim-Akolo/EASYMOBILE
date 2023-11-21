@@ -10,7 +10,6 @@ class EasyData(EasyB2B):
         data = {'networks': networks}
         data.update(**kwargs)
         response = self.sess.post(url, json=data, timeout=self.timeout)
-        assert response.status_code == 200
         return response.json()
     
     def get_data_types(self, network=1, **kwargs):
@@ -18,7 +17,6 @@ class EasyData(EasyB2B):
         data = {'network': str(network)}
         data.update(**kwargs)
         response = self.sess.post(url, json=data, timeout=self.timeout)
-        assert response.status_code == 200
         return response.json()
     
     def get_data_plans(self, network=1, dataType='SME', **kwargs):
@@ -26,7 +24,6 @@ class EasyData(EasyB2B):
         data = {'network': str(network), 'dataType': dataType}
         data.update(**kwargs)
         response = self.sess.post(url, json=data, timeout=self.timeout)
-        assert response.status_code == 200
         return response.json()
     
     def purchase_data(self, reference:str, network=1, dataType='SME', planId='1', phone='08168639113'):
@@ -39,7 +36,6 @@ class EasyData(EasyB2B):
             "reference": reference 
         }
         response = self.sess.post(url, json=data, timeout=self.timeout)
-        assert response.status_code == 200
         return response.json()
     
     def get_transaction_status(self, ref: str):

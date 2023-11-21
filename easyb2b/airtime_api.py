@@ -10,7 +10,6 @@ class EasyAirtime(EasyB2B):
         data = {'networks': networks}
         data.update(**kwargs)
         response = self.sess.post(url, json=data, timeout=self.timeout)
-        assert response.status_code == 200
         return response.json()
     
     def get_airtime_types(self, network=1, **kwargs):
@@ -18,7 +17,6 @@ class EasyAirtime(EasyB2B):
         data = {'network': str(network)}
         data.update(**kwargs)
         response = self.sess.post(url, json=data, timeout=self.timeout)
-        assert response.status_code == 200
         return response.json()
     
     def get_airtime_rates(self, network=1, airtimeType='VTU', **kwargs):
@@ -26,7 +24,6 @@ class EasyAirtime(EasyB2B):
         data = {'network': str(network), 'airtimeType': airtimeType}
         data.update(**kwargs)
         response = self.sess.post(url, json=data, timeout=self.timeout)
-        assert response.status_code == 200
         return response.json()
     
     def purchase_airtime(self, reference:str, network:str=1, airtimeType:str='SME', amount:str='10', phone:str='08168639113'):
@@ -39,7 +36,6 @@ class EasyAirtime(EasyB2B):
             "reference": reference 
         }
         response = self.sess.post(url, json=data, timeout=self.timeout)
-        assert response.status_code == 200
         return response.json()
     
     def get_transaction_status(self, ref: str):

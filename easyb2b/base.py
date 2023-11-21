@@ -43,7 +43,6 @@ class EasyB2B(object):
         data = {'email': email}
         data.update(**kwargs)
         response = self.sess.post(url, json=data, timeout=self.timeout)
-        assert response.status_code == 200
         return response.json()
     
     def get_transaction_status(self, name, ref:str):
@@ -52,6 +51,5 @@ class EasyB2B(object):
             "reference": ref
         }
         response = self.sess.post(url, json=data, timeout=self.timeout)
-        assert response.status_code == 200
         return response.json()
 
