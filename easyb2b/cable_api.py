@@ -26,7 +26,7 @@ class EasyCable(EasyB2B):
         response = self.sess.post(url, json=data, timeout=self.timeout)
         return response.json()
     
-    def purchase_cable(self, reference:str, cable_id:str='1', package_id:str='1', amount_optional:str='10', smartcard_no:str=''):
+    def purchase_cable(self, reference:str, cable_id:str='1', package_id:str='1', amount_optional:str=None, smartcard_no:str=''):
         url = f'{self.base_url}/v1/topup/cable'
         data = {
             "cableId": str(cable_id),
@@ -34,7 +34,7 @@ class EasyCable(EasyB2B):
             "smartCardNo": smartcard_no,
             "reference": reference 
         }
-        if amount_optional: data["topupAmount"] = amount_optional
+        if amount_optional is not None: data["topupAmount"] = amount_optional
         response = self.sess.post(url, json=data, timeout=self.timeout)
         return response.json()
     
