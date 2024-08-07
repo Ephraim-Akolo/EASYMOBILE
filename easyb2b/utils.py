@@ -7,9 +7,10 @@ _alphnum = [chr(i) for i in range(48, 58)] + [chr(i) for i in range(65, 91)] + [
 def get_easyb2b_reference(code_len: int = 16) -> str:
     """
     Generate a unique reference code for a transaction by combining the current date-time string and a random alphanumeric code.
+    
     Args:
         code_len (int, optional): The length of the random alphanumeric code. Default is 16.
-        
+
     Returns:
         str: The generated reference code.
     """
