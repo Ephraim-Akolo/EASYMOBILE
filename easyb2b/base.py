@@ -1,33 +1,50 @@
-import requests, os
+import requests
+import os
 from easyb2b.mocked import MockedRequests
 
 API_KEY = os.getenv('EASYB2B_API_KEY')
 
-
-class EasyB2B(object):
+class EasyB2B:
+    """
+    A class to interact with the EasyB2B API.
+    
+    Attributes:
+        api_key (str): The API key for authentication.
+        timeout (float): The timeout for API requests.
+    """
     _mocked = False
     sess = None
     base_url = "https://b2b.eazymobile.ng/api/live"
     timeout = 45.1
 
-    def __init__(self, api_key:str = None, timeout=None) -> None:
-        if timeout: self.timeout = timeout
+    def __init__(self, api_key: str = None, timeout: float = None) -> None:
+        """
+        Initialize the EasyB2B object.
+
+        Args:
+            api_key (str, optional): The API key for authentication. If not provided, will use the environment variable `EASYB2B_API_KEY`.
+            timeout (float, optional): Timeout for the requests. Default is 45.1 seconds.
+        """
+        if timeout:
+            self.timeout = timeout
+
         self.req_session = requests.session()
         self.req_session.headers['Content-Type'] = 'application/json'
         self.req_session.headers['Accept'] = 'application/json'
         self.mocked = False
+
         if API_KEY:
             self.req_session.headers['Authorization'] = f'Bearer {API_KEY}'
         elif api_key:
             self.req_session.headers['Authorization'] = f'Bearer {api_key}'
         else:
-            self.req_session.headers['Authorization'] = f'Bearer Demo'
+            self.req_session.headers['Authorization'] = 'Bearer Demo'
             self.mocked = True
 
     @property
     def mocked(self):
         return self._mocked
-    
+
     @mocked.setter
     def mocked(self, val):
         if not isinstance(val, bool):
@@ -36,16 +53,35 @@ class EasyB2B(object):
             self.sess = MockedRequests(session=self.req_session)
         else:
             self.sess = self.req_session
-        self._mocked = val    
-    
+        self._mocked = val
+
     def get_wallet_balance(self, email='example@email.com', **kwargs):
+        """
+        Get the wallet balance for a given email.
+
+        Args:
+            email (str, optional): The email to get the wallet balance for. Default is 'example@email.com'.
+
+        Returns:
+            dict: The response from the API as a JSON dictionary.
+        """
         url = f'{self.base_url}/v1/load/wallet-balance'
         data = {'email': email}
         data.update(**kwargs)
         response = self.sess.post(url, json=data, timeout=self.timeout)
         return response.json()
-    
-    def get_transaction_status(self, name, ref:str):
+
+    def get_transaction_status(self, name: str, ref: str):
+        """
+        Get the transaction status for a given reference.
+
+        Args:
+            name (str): The name associated with the transaction.
+            ref (str): The reference of the transaction.
+
+        Returns:
+            dict: The response from the API as a JSON dictionary.
+        """
         url = f'{self.base_url}/v1/transaction/status/{name}'
         data = {
             "reference": ref
