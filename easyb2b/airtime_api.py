@@ -1,6 +1,7 @@
 from easyb2b import exceptions
 from easyb2b.base import EasyB2B
 
+
 class EasyAirtime(EasyB2B):
     """
     A class to interact with the EasyB2B API for airtime-related operations.
