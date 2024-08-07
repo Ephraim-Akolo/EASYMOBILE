@@ -68,8 +68,12 @@ class EasyB2B:
         url = f'{self.base_url}/v1/load/wallet-balance'
         data = {'email': email}
         data.update(**kwargs)
-        response = self.sess.post(url, json=data, timeout=self.timeout)
-        return response.json()
+        try:
+            response = self.sess.post(url, json=data, timeout=self.timeout)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            return {'error': str(e)}
 
     def get_transaction_status(self, name: str, ref: str):
         """
@@ -83,9 +87,10 @@ class EasyB2B:
             dict: The response from the API as a JSON dictionary.
         """
         url = f'{self.base_url}/v1/transaction/status/{name}'
-        data = {
-            "reference": ref
-        }
-        response = self.sess.post(url, json=data, timeout=self.timeout)
-        return response.json()
-
+        data = {"reference": ref}
+        try:
+            response = self.sess.post(url, json=data, timeout=self.timeout)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            return {'error': str(e)}
