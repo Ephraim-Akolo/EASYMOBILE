@@ -1,5 +1,6 @@
 import requests
 import os
+from easyb2b import exceptions
 from easyb2b.mocked import MockedRequests
 
 API_KEY = os.getenv('EASYB2B_API_KEY')
@@ -20,10 +21,6 @@ class EasyB2B:
     def __init__(self, api_key: str = None, timeout: float = None) -> None:
         """
         Initialize the EasyB2B object.
-
-        Args:
-            api_key (str, optional): The API key for authentication. If not provided, will use the environment variable `EASYB2B_API_KEY`.
-            timeout (float, optional): Timeout for the requests. Default is 45.1 seconds.
         """
         if timeout:
             self.timeout = timeout
@@ -72,7 +69,7 @@ class EasyB2B:
             response = self.sess.post(url, json=data, timeout=self.timeout)
             response.raise_for_status()
             return response.json()
-        except requests.exceptions.RequestException as e:
+        except exceptions.RequestException as e:
             return {'error': str(e)}
 
     def get_transaction_status(self, name: str, ref: str):
@@ -92,5 +89,5 @@ class EasyB2B:
             response = self.sess.post(url, json=data, timeout=self.timeout)
             response.raise_for_status()
             return response.json()
-        except requests.exceptions.RequestException as e:
+        except exceptions.RequestException as e:
             return {'error': str(e)}
