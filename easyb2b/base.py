@@ -55,12 +55,12 @@ class EasyB2B:
             self.sess = self.req_session
         self._mocked = val
 
-    def get_wallet_balance(self, email='example@email.com', **kwargs):
+    def get_wallet_balance(self, email, **kwargs):
         """
         Get the wallet balance for a given email.
 
         Args:
-            email (str, optional): The email to get the wallet balance for. Default is 'example@email.com'.
+            email (str): The email to get the wallet balance for.
 
         Returns:
             dict: The response from the API as a JSON dictionary.
@@ -77,10 +77,10 @@ class EasyB2B:
 
     def get_transaction_status(self, name: str, ref: str):
         """
-        Get the transaction status for a given reference.
+        Get the transaction status for a given transaction reference.
 
         Args:
-            name (str): The name associated with the transaction.
+            name (str): The name/type associated with the transaction.
             ref (str): The reference of the transaction.
 
         Returns:
