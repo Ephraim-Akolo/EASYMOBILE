@@ -1,9 +1,11 @@
+from easyb2b import exceptions
 from easyb2b.base import EasyB2B
+
 
 class EasyData(EasyB2B):
     """
     A class to interact with the EasyB2B API for data-related operations.
-    ref: https://b2b.eazymobile.ng/api/developer/v1/documentation/start#item-2-4
+    ref: https://b2b.eazymobile.ng/api/developer/v1/documentation/start#item-2-3
     """
     
     def __init__(self, api_key:str=None, timeout=None) -> None:
@@ -30,8 +32,13 @@ class EasyData(EasyB2B):
         url = f'{self.base_url}/v1/topup/load/networks'
         data = {'networks': networks}
         data.update(**kwargs)
-        response = self.sess.post(url, json=data, timeout=self.timeout)
-        return response.json()
+        try:
+            response = self.sess.post(url, json=data, timeout=self.timeout)
+            response.raise_for_status()
+            return response.json()
+        except exceptions.RequestException as e:
+            return {'error': str(e)}
+
 
     def get_data_types(self, network:int, **kwargs):
         """
@@ -47,8 +54,13 @@ class EasyData(EasyB2B):
         url = f'{self.base_url}/v1/topup/load/data-types'
         data = {'network': str(network)}
         data.update(**kwargs)
-        response = self.sess.post(url, json=data, timeout=self.timeout)
-        return response.json()
+        try:
+            response = self.sess.post(url, json=data, timeout=self.timeout)
+            response.raise_for_status()
+            return response.json()
+        except exceptions.RequestException as e:
+            return {'error': str(e)}
+
 
     def get_data_plans(self, network:int, data_type:str, **kwargs):
         """
@@ -65,8 +77,13 @@ class EasyData(EasyB2B):
         url = f'{self.base_url}/v1/topup/load/data'
         data = {'network': str(network), 'dataType': data_type}
         data.update(**kwargs)
-        response = self.sess.post(url, json=data, timeout=self.timeout)
-        return response.json()
+        try:
+            response = self.sess.post(url, json=data, timeout=self.timeout)
+            response.raise_for_status()
+            return response.json()
+        except exceptions.RequestException as e:
+            return {'error': str(e)}
+
 
     def purchase_data(self, reference:str, network:int, data_type:str, plan_id:str, phone:str):
         """
@@ -90,8 +107,13 @@ class EasyData(EasyB2B):
             "phone": phone,
             "reference": reference 
         }
-        response = self.sess.post(url, json=data, timeout=self.timeout)
-        return response.json()
+        try:
+            response = self.sess.post(url, json=data, timeout=self.timeout)
+            response.raise_for_status()
+            return response.json()
+        except exceptions.RequestException as e:
+            return {'error': str(e)}
+
 
     def get_transaction_status(self, ref: str):
         """
