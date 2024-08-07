@@ -125,4 +125,4 @@ class EasyAirtime(EasyB2B):
 
 
 if __name__ == "__main__":
-    EasyAirtime()
+    pass
