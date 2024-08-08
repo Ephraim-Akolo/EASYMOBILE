@@ -1,4 +1,4 @@
-from easymobile.base import EasyB2B
+from .base import EasyB2B
 
 
 class EasyCable(EasyB2B):

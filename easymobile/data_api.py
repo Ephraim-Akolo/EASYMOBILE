@@ -1,5 +1,5 @@
-from easymobile import exceptions
-from easymobile.base import EasyB2B
+from . import exceptions
+from .base import EasyB2B
 
 
 class EasyData(EasyB2B):
