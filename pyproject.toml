@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "easyb2b"
+name = "easymobile"
 version = "0.1.0"
 description = "EASYMOBILE Python client library"
 authors = ["Ephraim <ephraimakolo2017@gmail.com>"]
@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/jake-ephraim/EASYMOBILE"
 repository = "https://github.com/jake-ephraim/EASYMOBILE"
-keywords = ["EASYMOBILE", "easyb2b"]
+keywords = ["EASYMOBILE", "easymobile"]
 classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Development Status :: 2 - Pre-Alpha",

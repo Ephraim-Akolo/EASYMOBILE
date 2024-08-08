@@ -2,11 +2,11 @@ import importlib
 
 from setuptools import setup
 
-spec = importlib.util.spec_from_file_location("version", "easyb2b/version.py")
+spec = importlib.util.spec_from_file_location("version", "easymobile/version.py")
 version_module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(version_module)
 
-packages = ["easyb2b"]
+packages = ["easymobile"]
 
 package_data = {"": ["*"]}
 
@@ -15,7 +15,7 @@ install_requires = [
 ]
 
 setup_kwargs = {
-    "name": "easyb2b",
+    "name": "easymobile",
     "version": version_module.VERSION,
     "description": "EASYMOBILE Python client library",
     "long_description": open("README.md").read(),

@@ -1,7 +1,7 @@
 import requests
 import os
-from easyb2b import exceptions
-from easyb2b.mocked import MockedRequests
+from easymobile import exceptions
+from easymobile.mocked import MockedRequests
 
 API_KEY = os.getenv('EASYB2B_API_KEY')
 

@@ -1,26 +1,26 @@
-from easyb2b import exceptions
-from easyb2b.base import EasyB2B
+from easymobile import exceptions
+from easymobile.base import EasyB2B
 
 
-class EasyData(EasyB2B):
+class EasyAirtime(EasyB2B):
     """
-    A class to interact with the EasyB2B API for data-related operations.
-    ref: https://b2b.eazymobile.ng/api/developer/v1/documentation/start#item-2-3
+    A class to interact with the EasyB2B API for airtime-related operations.
+    ref: https://b2b.eazymobile.ng/api/developer/v1/documentation/start#item-2-4
     """
     
-    def __init__(self, api_key:str=None, timeout=None) -> None:
+    def __init__(self, api_key: str = None, timeout=None) -> None:
         """
-        Initialize the EasyData object.
+        Initialize the EasyAirtime object.
         
         Args:
-            api_key (str, optional): The API key for authentication. If not provided, will use the environment variable `EASYB2B_API_KEY`. Set key as "Demo" to use the mocked API..
+            api_key (str, optional): The API key for authentication. If not provided, will use the environment variable `EASYB2B_API_KEY`. Set key as "Demo" to use the mocked API.
             timeout (float, optional): Timeout for the requests. Default is 45.1 seconds.
         """
         super().__init__(api_key, timeout)
 
-    def get_networks(self, networks='all', **kwargs):
+    def get_networks(self, networks:str='all', **kwargs):
         """
-        Retrieve available networks for data top-up.
+        Query all the networks for airtime top-up.
 
         Args:
             networks (str, optional): Specify the network to retrieve. Default is 'all'. Do not change unless you know what you are doing!
@@ -32,6 +32,7 @@ class EasyData(EasyB2B):
         url = f'{self.base_url}/v1/topup/load/networks'
         data = {'networks': networks}
         data.update(**kwargs)
+        response = self.sess.post(url, json=data, timeout=self.timeout)
         try:
             response = self.sess.post(url, json=data, timeout=self.timeout)
             response.raise_for_status()
@@ -39,10 +40,9 @@ class EasyData(EasyB2B):
         except exceptions.RequestException as e:
             return {'error': str(e)}
 
-
-    def get_data_types(self, network:int, **kwargs):
+    def get_airtime_types(self, network:int, **kwargs):
         """
-        Retrieve available data types for a specific network.
+        Retrieve available airtime types for a specific network.
 
         Args:
             network (int): Network ID. Use the `.get_networks` method to fetch available networks and their IDs.
@@ -51,7 +51,7 @@ class EasyData(EasyB2B):
         Returns:
             dict: JSON response from the API.
         """
-        url = f'{self.base_url}/v1/topup/load/data-types'
+        url = f'{self.base_url}/v1/topup/load/airtime-types'
         data = {'network': str(network)}
         data.update(**kwargs)
         try:
@@ -61,21 +61,20 @@ class EasyData(EasyB2B):
         except exceptions.RequestException as e:
             return {'error': str(e)}
 
-
-    def get_data_plans(self, network:int, data_type:str, **kwargs):
+    def get_airtime_rates(self, network:int, airtime_type:str, **kwargs):
         """
-        Retrieve data plans for a specific network and data type.
+        Retrieve airtime rates for a specific network and airtime type.
 
         Args:
             network (int): Network ID. Use the `.get_networks` method to fetch available networks and their IDs.
-            data_type (str): Type of data. Use the `.get_data_types` method to fetch available data types.
+            airtime_type (str): Type of airtime. Use the `.get_airtime_types` method to fetch available network types and their names.
             **kwargs: Additional keyword arguments.
 
         Returns:
             dict: JSON response from the API.
         """
-        url = f'{self.base_url}/v1/topup/load/data'
-        data = {'network': str(network), 'dataType': data_type}
+        url = f'{self.base_url}/v1/topup/load/airtime-rate'
+        data = {'network': str(network), 'airtimeType': airtime_type}
         data.update(**kwargs)
         try:
             response = self.sess.post(url, json=data, timeout=self.timeout)
@@ -84,26 +83,25 @@ class EasyData(EasyB2B):
         except exceptions.RequestException as e:
             return {'error': str(e)}
 
-
-    def purchase_data(self, reference:str, network:int, data_type:str, plan_id:str, phone:str):
+    def purchase_airtime(self, reference: str, network:int, airtime_type:str, amount:int, phone:str):
         """
-        Purchase data for a given phone number.
+        Purchase airtime for a given phone number.
 
         Args:
             reference (str): Unique reference for the transaction. (see https://b2b.eazymobile.ng/api/developer/v1/documentation/start#item-2-14 ).
-            network (int): Network ID. Default is 1. Use the `.get_networks` method to fetch available networks and their IDs.
-            data_type (str): Type of data. Use the `.get_data_types` method to fetch available data types.
-            plan_id (str): ID of the data plan. Use the `.get_data_plans` method to fetch available data plans.
-            phone (str): Phone number to receive the data.
+            network (int): Network ID. Use the `.get_networks` method to fetch available networks and their IDs.
+            airtime_type (str): Type of airtime. Use the `.get_airtime_types` method to fetch available network types and their names.
+            amount (int|str): Amount of airtime to top-up.
+            phone (str): Phone number to receive the airtime.
 
         Returns:
             dict: JSON response from the API.
         """
-        url = f'{self.base_url}/v1/topup/data'
+        url = f'{self.base_url}/v1/topup/airtime'
         data = {
             "network": str(network),
-            "dataType": data_type,
-            "planId": str(plan_id),
+            "airtimeType": airtime_type,
+            "amount": str(amount),
             "phone": phone,
             "reference": reference 
         }
@@ -114,18 +112,17 @@ class EasyData(EasyB2B):
         except exceptions.RequestException as e:
             return {'error': str(e)}
 
-
     def get_transaction_status(self, ref: str):
         """
-        Get the status of a specific data transaction.
+        Get the status of a specific airtime transaction.
 
         Args:
-            ref (str): Reference of the transaction.
+            ref (str): Reference of the transaction you generated and supplied.
 
         Returns:
             dict: JSON response from the API.
         """
-        return super().get_transaction_status('data', ref)
+        return super().get_transaction_status('airtime', ref)
 
 
 if __name__ == "__main__":
