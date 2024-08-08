@@ -10,22 +10,25 @@ class TestMockedEasyAirtime(unittest.TestCase):
     def test_get_networks(self):
         response = self.easy_airtime.get_networks()
         self.assertTrue(response['status'], response)
+        self.assertEqual(response['code'], 200)
         self.assertIn('product', response['data'])
 
     def test_get_airtime_types(self):
         response = self.easy_airtime.get_airtime_types(network=1)
         self.assertTrue(response['status'])
+        self.assertEqual(response['code'], 200)
         self.assertIn('product', response['data'])
 
     def test_get_airtime_rates(self):
         response = self.easy_airtime.get_airtime_rates(network=1, airtime_type='VTU')
         self.assertTrue(response['status'])
+        self.assertEqual(response['code'], 200)
         # self.assertIn('rate', response['data']['product'])
 
     def test_purchase_airtime(self):
         response = self.easy_airtime.purchase_airtime(reference=get_easyb2b_reference(), network=1, airtime_type='SME', amount='10', phone='08168639114')
         self.assertTrue(response['status'])
-        self.assertEqual(response['data']['message'], 'SUCCESSFUL')
+        self.assertEqual(response['code'], 200)
 
     # def test_get_transaction_status(self):
     #     response = self.easy_airtime.get_transaction_status(ref=get_easyb2b_reference())
