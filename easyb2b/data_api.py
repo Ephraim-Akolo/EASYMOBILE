@@ -13,7 +13,7 @@ class EasyData(EasyB2B):
         Initialize the EasyData object.
         
         Args:
-            api_key (str, optional): The API key for authentication. If not provided, will use the environment variable `EASYB2B_API_KEY`.
+            api_key (str, optional): The API key for authentication. If not provided, will use the environment variable `EASYB2B_API_KEY`. Set key as "Demo" to use the mocked API..
             timeout (float, optional): Timeout for the requests. Default is 45.1 seconds.
         """
         super().__init__(api_key, timeout)
