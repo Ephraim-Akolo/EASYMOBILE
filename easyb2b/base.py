@@ -28,15 +28,15 @@ class EasyB2B:
         self.req_session = requests.session()
         self.req_session.headers['Content-Type'] = 'application/json'
         self.req_session.headers['Accept'] = 'application/json'
-        self.mocked = False
 
-        if API_KEY:
-            self.req_session.headers['Authorization'] = f'Bearer {API_KEY}'
-        elif api_key:
+        if api_key:
             self.req_session.headers['Authorization'] = f'Bearer {api_key}'
+            self.mocked = True if api_key.lower() == 'demo' else False
+        elif API_KEY:
+            self.req_session.headers['Authorization'] =  f'Bearer {API_KEY}'
+            self.mocked = True if API_KEY.lower() == 'demo' else False
         else:
-            self.req_session.headers['Authorization'] = 'Bearer Demo'
-            self.mocked = True
+            raise ValueError("Invalid or No API key provided!")
 
     @property
     def mocked(self):
