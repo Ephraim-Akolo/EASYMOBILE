@@ -12,7 +12,7 @@ class EasyCable(EasyB2B):
         Initialize the EasyCable object.
         
         Args:
-            api_key (str, optional): The API key for authentication.
+            api_key (str, optional): The API key for authentication. If not provided, will use the environment variable `EASYB2B_API_KEY`. Set key as "Demo" to use the mocked API.
             timeout (float, optional): Timeout for API requests.
         """
         super().__init__(api_key, timeout)
