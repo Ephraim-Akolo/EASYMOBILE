@@ -83,3 +83,6 @@ class ResponseJson:
             dict: The JSON response data.
         """
         return self.data
+    
+    def raise_for_status(self):
+        return
