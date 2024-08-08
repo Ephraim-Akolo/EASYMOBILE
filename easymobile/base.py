@@ -3,9 +3,9 @@ import os
 from . import exceptions
 from .mocked import MockedRequests
 
-API_KEY = os.getenv('EASYB2B_API_KEY')
+API_KEY = os.getenv('EASYMOBILE_API_KEY')
 
-class EasyB2B:
+class EasyBase:
     """
     A class to interact with the EasyB2B API.
     

@@ -1,8 +1,8 @@
 from . import exceptions
-from .base import EasyB2B
+from .base import EasyBase
 
 
-class EasyData(EasyB2B):
+class EasyData(EasyBase):
     """
     A class to interact with the EasyB2B API for data-related operations.
     ref: https://b2b.eazymobile.ng/api/developer/v1/documentation/start#item-2-3

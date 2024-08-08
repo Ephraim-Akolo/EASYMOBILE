@@ -1,7 +1,7 @@
-from .base import EasyB2B
+from .base import EasyBase
 
 
-class EasyCable(EasyB2B):
+class EasyCable(EasyBase):
     """
     A class to interact with the EasyB2B API for cable TV-related operations.
     ref: https://b2b.eazymobile.ng/api/developer/v1/documentation/start#item-2-5
