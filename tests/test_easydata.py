@@ -25,7 +25,7 @@ class TestEasyData(unittest.TestCase):
         self.assertIn('product', response['data'])
 
     def test_purchase_data(self):
-        response = self.easy_data.purchase_data(reference=get_easyb2b_reference(), network=1, data_type='SME', plan_id='1', phone='08168639113')
+        response = self.easy_data.purchase_data(reference=get_easyb2b_reference(), network=1, data_type='SME', plan_id='1', phone='08168639114')
         self.assertTrue(response['status'])
         self.assertEqual(response['code'], 200)
 
