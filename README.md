@@ -16,13 +16,12 @@
 To install the EasyB2B package, clone this repository and install:
 
 ```bash
-git clone https://github.com/Ephraim-Akolo/EASYMOBILE.git
-cd EASYMOBILE
-pip install .
+pip install easymobile
 ```
-or
+or if you wish to install from the git repo.
 
 ```bash
+# Install from the main branch
 pip install git+https://github.com/Ephraim-Akolo/EASYMOBILE.git
 ```
 
@@ -138,7 +137,7 @@ python -m unittest
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
+Contributions are welcome! Please fork the repository and create a pull request to `dev` branch with your changes.
 
 ## License
 
