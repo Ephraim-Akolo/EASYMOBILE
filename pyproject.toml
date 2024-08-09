@@ -16,7 +16,7 @@ classifiers = [
 
 [tool.setuptools_scm]
 write_to = "easymobile/version.py"
-version_scheme = "guess-next-dev"
+version_scheme = "post-release"
 local_scheme = "no-local-version"
 
 [build-system]
