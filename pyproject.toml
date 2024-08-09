@@ -1,6 +1,5 @@
 [tool.poetry]
 name = "easymobile"
-version = "0.0.0"
 description = "EASYMOBILE Python client library"
 authors = ["Ephraim <ephraimakolo2017@gmail.com>"]
 license = "MIT"
@@ -16,8 +15,13 @@ classifiers = [
 ]
 
 [tool.setuptools_scm]
-version_scheme = "post-release"
-local_scheme = "dirty-tag"
+write_to = "easymobile/version.py"
+version_scheme = "guess-next-dev"
+local_scheme = "node-and-date""
+
+[build-system]
+requires = ["poetry-core", "setuptools_scm", "setuptools_scm[toml]"]
+build-backend = "setuptools.build_meta"
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
@@ -67,7 +71,3 @@ omit = [
     "env/*",
     "setup.py",
 ]
-
-[build-system]
-requires = ["poetry-core", "setuptools_scm"]
-build-backend = "poetry.core.masonry.api"
