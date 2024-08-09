@@ -1,5 +1,6 @@
 [tool.poetry]
 name = "easymobile"
+version = "0.0.0"
 description = "EASYMOBILE Python client library"
 authors = ["Ephraim <ephraimakolo2017@gmail.com>"]
 license = "MIT"
