@@ -1,35 +1,29 @@
-import importlib
-
 from setuptools import setup
-
-spec = importlib.util.spec_from_file_location("version", "easymobile/version.py")
-version_module = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(version_module)
 
 packages = ["easymobile"]
 
 package_data = {"": ["*"]}
 
-install_requires = [
-    "requests",
-]
+install_requires = ["requests"]
+
+setup_requires = ["setuptools_scm"]
 
 setup_kwargs = {
     "name": "easymobile",
-    "version": version_module.VERSION,
+    "use_scm_version": True,  # Automatically uses the version from Git tags
     "description": "EASYMOBILE Python client library",
     "long_description": open("README.md").read(),
     "long_description_content_type": "text/markdown",
     "author": "Ephraim",
     "author_email": "ephraimakolo2017@gmail.com",
-    "maintainer": None,
-    "maintainer_email": None,
+    "maintainer": "Akolo Jonah Kutsa",
+    "maintainer_email": "ephraimakolo2017@gmail.com",
     "url": "https://github.com/jake-ephraim/EASYMOBILE",
     "packages": packages,
     "package_data": package_data,
     "install_requires": install_requires,
+    "setup_requires": setup_requires,
     "python_requires": ">=3.7",
 }
-
 
 setup(**setup_kwargs)
