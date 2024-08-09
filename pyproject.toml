@@ -1,48 +1,33 @@
-[tool.poetry]
+[build-system]
+requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=6.0.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
 name = "easymobile"
+dynamic = ["version"]
 description = "EASYMOBILE Python client library"
-authors = ["Ephraim <ephraimakolo2017@gmail.com>"]
-license = "MIT"
+authors = [{name = "Ephraim", email = "ephraimakolo2017@gmail.com"}]
+license = {text = "MIT"}
 readme = {file = "README.md", content-type = "text/markdown"}
-homepage = "https://github.com/jake-ephraim/EASYMOBILE"
-repository = "https://github.com/jake-ephraim/EASYMOBILE"
+requires-python = ">=3.7,<4.0"
 keywords = ["EASYMOBILE", "easymobile"]
 classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Development Status :: 2 - Pre-Alpha",
   "Intended Audience :: Developers",
-  'Natural Language :: English',
+  "Natural Language :: English",
 ]
+
+dependencies = ["requests"]
+
+[project.urls]
+homepage = "https://github.com/jake-ephraim/EASYMOBILE"
+repository = "https://github.com/jake-ephraim/EASYMOBILE"
 
 [tool.setuptools_scm]
 write_to = "easymobile/version.py"
 version_scheme = "post-release"
 local_scheme = "no-local-version"
-
-[build-system]
-requires = ["poetry-core", "setuptools", "setuptools_scm[toml]"]
-build-backend = "setuptools.build_meta"
-
-[tool.poetry.dependencies]
-python = ">=3.7,<4.0"
-requests = "*"
-
-[tool.poetry.dev-dependencies]
-pytest = "*"
-pytest-cov = "*"
-pytest-asyncio = "*"
-
-[tool.pytest.ini_options]
-addopts = [
-    "--cov=.",
-    "--cov-report",
-    "term-missing"
-]
-filterwarnings = [
-    "error::DeprecationWarning",
-    "error::PendingDeprecationWarning",
-    "ignore:pkg_resources is deprecated as an API:DeprecationWarning"
-]
 
 [tool.black]
 line-length = 127
@@ -71,3 +56,6 @@ omit = [
     "env/*",
     "setup.py",
 ]
+
+[tool.coverage.report]
+show_missing = true
