@@ -137,7 +137,7 @@ python -m unittest
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
+Contributions are welcome! Please fork the repository and create a pull request to `dev` branch with your changes.
 
 ## License
 
