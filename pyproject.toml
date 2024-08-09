@@ -3,7 +3,7 @@ name = "easymobile"
 description = "EASYMOBILE Python client library"
 authors = ["Ephraim <ephraimakolo2017@gmail.com>"]
 license = "MIT"
-readme = "README.md"
+readme = {file = "README.md", content-type = "text/markdown"}
 homepage = "https://github.com/jake-ephraim/EASYMOBILE"
 repository = "https://github.com/jake-ephraim/EASYMOBILE"
 keywords = ["EASYMOBILE", "easymobile"]
@@ -20,7 +20,7 @@ version_scheme = "guess-next-dev"
 local_scheme = "node-and-date"
 
 [build-system]
-requires = ["poetry-core", "setuptools_scm", "setuptools_scm[toml]"]
+requires = ["poetry-core", "setuptools", "setuptools_scm[toml]"]
 build-backend = "setuptools.build_meta"
 
 [tool.poetry.dependencies]
