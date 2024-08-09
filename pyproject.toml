@@ -17,7 +17,7 @@ classifiers = [
 [tool.setuptools_scm]
 write_to = "easymobile/version.py"
 version_scheme = "guess-next-dev"
-local_scheme = "node-and-date"
+local_scheme = "no-local-version"
 
 [build-system]
 requires = ["poetry-core", "setuptools", "setuptools_scm[toml]"]
