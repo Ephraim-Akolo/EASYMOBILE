@@ -1,7 +1,7 @@
 import unittest
 from easymobile import EasyCable, get_easyb2b_reference
 
-class TestEasyCable(unittest.TestCase):
+class TestMockedEasyCable(unittest.TestCase):
     
     def setUp(self):
         self.easy_cable = EasyCable(api_key='demo')
