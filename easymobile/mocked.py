@@ -8,8 +8,9 @@ class MockedRequests:
     """
     base_url = "https://b2b.eazymobile.ng/api"
     urls = [
-        # Airtime and Data
         (f'{base_url}/live/v1/load/wallet-balance', f"{base_url}/test/v1/load/wallet-balance", {"status": True, "code": 200, "data": {"product": {"wallet": "82318.60"}}}),
+
+        # Airtime and Data
         (f'{base_url}/live/v1/topup/load/networks', f'{base_url}/test/v1/topup/load/networks', {'status': True, 'code': 200, 'data': {'product': [{'network': 'MTN', 'networkId': 1}, {'network': 'AIRTEL', 'networkId': 2}, {'network': 'GLO', 'networkId': 3}, {'network': '9MOBILE', 'networkId': 4}]}}),
         (f'{base_url}/live/v1/topup/load/airtime-types', f'{base_url}/test/v1/topup/load/airtime-types', {'status': True, 'code': 200, 'data': {'product': [{'network': 'MTN', 'networkId': 1, 'name': 'VTU'}, {'network': 'MTN', 'networkId': 1, 'name': 'SNS'}, {'network': 'MTN', 'networkId': 1, 'name': 'AWOOF4U'}, {'network': 'MTN', 'networkId': 1, 'name': 'GARABASA'}]}}),
         (f'{base_url}/live/v1/topup/load/data-types', f'{base_url}/test/v1/topup/load/data-types', {'status': True, 'code': 200, 'data': {'product': [{'network': 'MTN', 'networkId': 1, 'name': 'SME'}, {'network': 'MTN', 'networkId': 1, 'name': 'CORPORATE GIFTING'}, {'network': 'MTN', 'networkId': 1, 'name': 'DIRECT GIFTING'}, {'network': 'MTN', 'networkId': 1, 'name': 'NORMAL GIFTING'}]}}),
@@ -59,9 +60,29 @@ class MockedRequests:
         for live_url, test_url, response in self.urls:
             if url == live_url or url == test_url:
                 return ResponseJson(response)
-        
-        return ResponseJson({"details": f"{url} not found!"}, status_code=404)
+            
+        # Check that it is a get transaction status if no matching URL found
+        _url = url.strip("/").split("/")
+        service = _url.pop()
+        url = '/'.join(_url)
+        if url == f'{self.base_url}/live/v1/transaction/status' or url == f'{self.base_url}/test/v1/transaction/status':
+            response = self._detect_and_fetch_services().get(service, None)
+            if response is None:
+                return ResponseJson({"details": f"{service} not found!"}, status_code=404)
+            else:
+                return ResponseJson(response)
 
+        return ResponseJson({"details": f"{url} not found!"}, status_code=404)
+    
+
+    def _detect_and_fetch_services(self):
+        result = {}
+        for i, _, k in self.urls:
+            i_list = i.split("/")
+            if i_list[-2] == 'topup':
+                result[i_list[-1]] = k
+        return result
+    
 class ResponseJson:
     """
     A class to mock the response object.
