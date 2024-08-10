@@ -1,7 +1,7 @@
 import unittest
 from easymobile import EasyData, get_easyb2b_reference
 
-class TestEasyData(unittest.TestCase):
+class TestMockedEasyData(unittest.TestCase):
     
     def setUp(self):
         self.easy_data = EasyData(api_key='demo')
