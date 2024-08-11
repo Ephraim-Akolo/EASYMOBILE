@@ -4,7 +4,7 @@ from .base import EasyBase
 
 class EasyAirtime(EasyBase):
     """
-    A class to interact with the EasyB2B API for airtime-related operations.
+    A class to interact with the Easymobile API for airtime-related operations.
     ref: https://b2b.eazymobile.ng/api/developer/v1/documentation/start#item-2-4
     """
     
