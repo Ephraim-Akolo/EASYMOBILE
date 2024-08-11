@@ -30,11 +30,10 @@ class TestMockedEasyAirtime(unittest.TestCase):
         self.assertTrue(response['status'])
         self.assertEqual(response['code'], 200)
 
-    # def test_get_transaction_status(self):
-    #     response = self.easy_airtime.get_transaction_status(ref=get_easyb2b_reference())
-    #     print(response)
-    #     self.assertTrue(response['status'], response)
-        # self.assertEqual(response['data']['transaction'], 'completed')
+    def test_get_transaction_status(self):
+        response = self.easy_airtime.get_transaction_status(ref=get_easyb2b_reference())
+        self.assertTrue(response['status'], response)
+        self.assertEqual(response['code'], 200)
 
 if __name__ == "__main__":
     unittest.main()

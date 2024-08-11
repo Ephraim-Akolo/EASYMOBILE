@@ -1,7 +1,7 @@
 import unittest
 from easymobile import EasyCable, get_easyb2b_reference
 
-class TestEasyCable(unittest.TestCase):
+class TestMockedEasyCable(unittest.TestCase):
     
     def setUp(self):
         self.easy_cable = EasyCable(api_key='demo')
@@ -29,10 +29,10 @@ class TestEasyCable(unittest.TestCase):
         self.assertTrue(response['status'])
         self.assertEqual(response['code'], 200)
 
-    # def test_get_transaction_status(self):
-    #     response = self.easy_cable.get_transaction_status(ref='test_ref')
-    #     self.assertTrue(response['status'])
-    #     self.assertEqual(response['data']['transaction'], 'completed')
+    def test_get_transaction_status(self):
+        response = self.easy_cable.get_transaction_status(ref=get_easyb2b_reference())
+        self.assertTrue(response['status'])
+        self.assertEqual(response['code'], 200)
 
 if __name__ == "__main__":
     unittest.main()
