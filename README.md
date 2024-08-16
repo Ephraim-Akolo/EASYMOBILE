@@ -40,7 +40,7 @@ api_key = 'your_api_key'
 
 client = EasyBase(api_key=api_key)
 
-# Get Networks
+# Get Account Balance
 response = client.get_wallet_balance("admin@email.com")
 print(response)
 ```
@@ -136,6 +136,34 @@ print(response)
 # Get Transaction Status
 status = client.get_transaction_status(ref=reference)
 print(status)
+```
+
+### Using Single Client For All Services
+
+If you require a client object that is capable of accessing all services, you can instantiate the `EasyMobile` class and use `easy_<service name>` to access any service specific methods.
+
+```python
+from easymobile import EasyMobile
+
+api_key = 'your_api_key'
+
+client = EasyMobile(api_key=api_key)
+
+# Get Account Balance
+response = client.get_wallet_balance("admin@email.com")
+print(response)
+
+# Get Networks (Airtime)
+networks = client.easy_airtime.get_networks()
+print(networks)
+
+# Get Networks (Data)
+networks = client.easy_data.get_networks()
+print(networks)
+
+# Get Cables
+cables = client.easy_cable.get_cables()
+print(cables)
 ```
 
 ## Running Tests
