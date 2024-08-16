@@ -31,6 +31,20 @@ pip install git+https://github.com/Ephraim-Akolo/EASYMOBILE.git
 
 To use the EASYMOBILE package, you need to initialize the classes with your API key. The API key can be provided during initialization or set in the environmental variable `EASYMOBILE_API_KEY`.
 
+### Account Operations
+
+```python
+from easymobile import EasyBase
+
+api_key = 'your_api_key'
+
+client = EasyBase(api_key=api_key)
+
+# Get Networks
+response = client.get_wallet_balance("admin@email.com")
+print(response)
+```
+
 ### Airtime Operations
 
 ```python
@@ -38,27 +52,27 @@ from easymobile import EasyAirtime, get_easyb2b_reference
 
 api_key = 'your_api_key'
 
-easy_airtime = EasyAirtime(api_key=api_key)
+client = EasyAirtime(api_key=api_key)
 
 # Get Networks
-networks = easy_airtime.get_networks()
+networks = client.get_networks()
 print(networks)
 
 # Get Airtime Types
-airtime_types = easy_airtime.get_airtime_types(network=1)
+airtime_types = client.get_airtime_types(network=1)
 print(airtime_types)
 
 # Get Airtime Rates
-airtime_rates = easy_airtime.get_airtime_rates(network=1, airtimeType='VTU')
+airtime_rates = client.get_airtime_rates(network=1, airtimeType='VTU')
 print(airtime_rates)
 
 # Purchase Airtime
 reference = get_easyb2b_reference()  # Generate a unique reference code
-response = easy_airtime.purchase_airtime(reference=reference, network=1, airtimeType='SME', amount='10', phone='08168639124')
+response = client.purchase_airtime(reference=reference, network=1, airtimeType='SME', amount='10', phone='08168639124')
 print(response)
 
 # Get Transaction Status
-status = easy_airtime.get_transaction_status(ref=reference)
+status = client.get_transaction_status(ref=reference)
 print(status)
 ```
 
