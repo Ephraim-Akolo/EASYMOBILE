@@ -171,7 +171,7 @@ print(cables)
 To run the tests for the EASYMOBILE package, create and/or activate a Python virtual environment, ensure the current working directory is the root directory, and follow these steps:
 ```bash
 # Install the test dependencies if not already done
-pip install -r test-requirements.txt
+pip install -r requirements-test.txt
 
 # Discover and run tests
 python -m unittest
