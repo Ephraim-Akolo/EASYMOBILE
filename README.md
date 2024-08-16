@@ -138,7 +138,7 @@ status = client.get_transaction_status(ref=reference)
 print(status)
 ```
 
-### Using Single Client For All Services
+### Single Client For All Operations
 
 If you require a client object that is capable of accessing all services, you can instantiate the `EasyMobile` class and use `easy_<service name>` to access any service specific methods.
 
