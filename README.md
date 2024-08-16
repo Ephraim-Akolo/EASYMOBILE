@@ -31,6 +31,20 @@ pip install git+https://github.com/Ephraim-Akolo/EASYMOBILE.git
 
 To use the EASYMOBILE package, you need to initialize the classes with your API key. The API key can be provided during initialization or set in the environmental variable `EASYMOBILE_API_KEY`.
 
+### Account Operations
+
+```python
+from easymobile import EasyBase
+
+api_key = 'your_api_key'
+
+client = EasyBase(api_key=api_key)
+
+# Get Account Balance
+response = client.get_wallet_balance("admin@email.com")
+print(response)
+```
+
 ### Airtime Operations
 
 ```python
@@ -38,27 +52,27 @@ from easymobile import EasyAirtime, get_easyb2b_reference
 
 api_key = 'your_api_key'
 
-easy_airtime = EasyAirtime(api_key=api_key)
+client = EasyAirtime(api_key=api_key)
 
 # Get Networks
-networks = easy_airtime.get_networks()
+networks = client.get_networks()
 print(networks)
 
 # Get Airtime Types
-airtime_types = easy_airtime.get_airtime_types(network=1)
+airtime_types = client.get_airtime_types(network=1)
 print(airtime_types)
 
 # Get Airtime Rates
-airtime_rates = easy_airtime.get_airtime_rates(network=1, airtimeType='VTU')
+airtime_rates = client.get_airtime_rates(network=1, airtimeType='VTU')
 print(airtime_rates)
 
 # Purchase Airtime
 reference = get_easyb2b_reference()  # Generate a unique reference code
-response = easy_airtime.purchase_airtime(reference=reference, network=1, airtimeType='SME', amount='10', phone='08168639124')
+response = client.purchase_airtime(reference=reference, network=1, airtimeType='SME', amount='10', phone='08168639124')
 print(response)
 
 # Get Transaction Status
-status = easy_airtime.get_transaction_status(ref=reference)
+status = client.get_transaction_status(ref=reference)
 print(status)
 ```
 
@@ -69,27 +83,27 @@ from easymobile import EasyData, get_easyb2b_reference
 
 api_key = 'your_api_key'
 
-easy_data = EasyData(api_key=api_key)
+client = EasyData(api_key=api_key)
 
 # Get Networks
-networks = easy_data.get_networks()
+networks = client.get_networks()
 print(networks)
 
 # Get Data Types
-data_types = easy_data.get_data_types(network=1)
+data_types = client.get_data_types(network=1)
 print(data_types)
 
 # Get Data Plans
-data_plans = easy_data.get_data_plans(network=1, dataType='SME')
+data_plans = client.get_data_plans(network=1, dataType='SME')
 print(data_plans)
 
 # Purchase Data
 reference = get_easyb2b_reference()  # Generate a unique reference code
-response = easy_data.purchase_data(reference=reference, network=1, dataType='SME', planId='1', phone='08168639113')
+response = client.purchase_data(reference=reference, network=1, dataType='SME', planId='1', phone='08168639113')
 print(response)
 
 # Get Transaction Status
-status = easy_data.get_transaction_status(ref=reference)
+status = client.get_transaction_status(ref=reference)
 print(status)
 ```
 
@@ -100,28 +114,56 @@ from easymobile import EasyCable, get_easyb2b_reference
 
 api_key = 'your_api_key'
 
-easy_cable = EasyCable(api_key=api_key)
+client = EasyCable(api_key=api_key)
 
 # Get Cables
-cables = easy_cable.get_cables()
+cables = client.get_cables()
 print(cables)
 
 # Get Cable Packages
-packages = easy_cable.get_cable_packages(cable_id=1)
+packages = client.get_cable_packages(cable_id=1)
 print(packages)
 
 # Validate Smartcard/IUC Number
-validation = easy_cable.validate_smartcard_iuc_number(cable_id=1, smartcard_no='1234567890')
+validation = client.validate_smartcard_iuc_number(cable_id=1, smartcard_no='1234567890')
 print(validation)
 
 # Purchase Cable Subscription
 reference = get_easyb2b_reference()  # Generate a unique reference code
-response = easy_cable.purchase_cable(reference=reference, cable_id='1', package_id='1', smartcard_no='1234567890')
+response = client.purchase_cable(reference=reference, cable_id='1', package_id='1', smartcard_no='1234567890')
 print(response)
 
 # Get Transaction Status
-status = easy_cable.get_transaction_status(ref=reference)
+status = client.get_transaction_status(ref=reference)
 print(status)
+```
+
+### Single Client For All Operations
+
+If you require a client object that is capable of accessing all services, you can instantiate the `EasyMobile` class and use `easy_<service name>` to access any service specific methods.
+
+```python
+from easymobile import EasyMobile
+
+api_key = 'your_api_key'
+
+client = EasyMobile(api_key=api_key)
+
+# Get Account Balance
+response = client.get_wallet_balance("admin@email.com")
+print(response)
+
+# Get Networks (Airtime)
+networks = client.easy_airtime.get_networks()
+print(networks)
+
+# Get Networks (Data)
+networks = client.easy_data.get_networks()
+print(networks)
+
+# Get Cables
+cables = client.easy_cable.get_cables()
+print(cables)
 ```
 
 ## Running Tests
@@ -129,7 +171,7 @@ print(status)
 To run the tests for the EASYMOBILE package, create and/or activate a Python virtual environment, ensure the current working directory is the root directory, and follow these steps:
 ```bash
 # Install the test dependencies if not already done
-pip install -r test-requirements.txt
+pip install -r requirements-test.txt
 
 # Discover and run tests
 python -m unittest
