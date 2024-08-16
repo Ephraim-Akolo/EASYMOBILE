@@ -83,27 +83,27 @@ from easymobile import EasyData, get_easyb2b_reference
 
 api_key = 'your_api_key'
 
-easy_data = EasyData(api_key=api_key)
+client = EasyData(api_key=api_key)
 
 # Get Networks
-networks = easy_data.get_networks()
+networks = client.get_networks()
 print(networks)
 
 # Get Data Types
-data_types = easy_data.get_data_types(network=1)
+data_types = client.get_data_types(network=1)
 print(data_types)
 
 # Get Data Plans
-data_plans = easy_data.get_data_plans(network=1, dataType='SME')
+data_plans = client.get_data_plans(network=1, dataType='SME')
 print(data_plans)
 
 # Purchase Data
 reference = get_easyb2b_reference()  # Generate a unique reference code
-response = easy_data.purchase_data(reference=reference, network=1, dataType='SME', planId='1', phone='08168639113')
+response = client.purchase_data(reference=reference, network=1, dataType='SME', planId='1', phone='08168639113')
 print(response)
 
 # Get Transaction Status
-status = easy_data.get_transaction_status(ref=reference)
+status = client.get_transaction_status(ref=reference)
 print(status)
 ```
 
@@ -114,27 +114,27 @@ from easymobile import EasyCable, get_easyb2b_reference
 
 api_key = 'your_api_key'
 
-easy_cable = EasyCable(api_key=api_key)
+client = EasyCable(api_key=api_key)
 
 # Get Cables
-cables = easy_cable.get_cables()
+cables = client.get_cables()
 print(cables)
 
 # Get Cable Packages
-packages = easy_cable.get_cable_packages(cable_id=1)
+packages = client.get_cable_packages(cable_id=1)
 print(packages)
 
 # Validate Smartcard/IUC Number
-validation = easy_cable.validate_smartcard_iuc_number(cable_id=1, smartcard_no='1234567890')
+validation = client.validate_smartcard_iuc_number(cable_id=1, smartcard_no='1234567890')
 print(validation)
 
 # Purchase Cable Subscription
 reference = get_easyb2b_reference()  # Generate a unique reference code
-response = easy_cable.purchase_cable(reference=reference, cable_id='1', package_id='1', smartcard_no='1234567890')
+response = client.purchase_cable(reference=reference, cable_id='1', package_id='1', smartcard_no='1234567890')
 print(response)
 
 # Get Transaction Status
-status = easy_cable.get_transaction_status(ref=reference)
+status = client.get_transaction_status(ref=reference)
 print(status)
 ```
 
