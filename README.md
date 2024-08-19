@@ -2,7 +2,7 @@
 
 ## Overview
 
-`easymobile` is a Python package that provides a simple interface for integrating with the EASYMOBILE API, allowing users to purchase airtime, data, cable subscriptions etc. This package is designed to streamline the process of interacting with the EASYMOBILE API and offers methods to handle various operations such as fetching available services, purchasing services, and checking transaction statuses.
+`easymobile` is a Python package that provides a simple interface for integrating with the EASYMOBILE API, allowing users to purchase airtime, data, cable subscriptions etc. This package is designed to streamline the process of interacting with the [EasyMobile API](https://b2b.eazymobile.ng/api/developer/v1/documentation/start#) and offers methods to handle various operations such as fetching available services, purchasing services, and checking transaction statuses.
 
 
 ## Available Features
