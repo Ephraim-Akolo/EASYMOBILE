@@ -30,7 +30,7 @@ pip install git+https://github.com/Ephraim-Akolo/EASYMOBILE.git
 
 ### Initialization
 
-To use the EASYMOBILE package, you need to initialize the classes with your API key. The API key can be provided during initialization or set in the environmental variable `EASYMOBILE_API_KEY`.
+To use the EASYMOBILE package, you need to initialize the classes with your API key. The API key can be provided during initialization or set in the environmental variable `EASYMOBILE_API_KEY`. Timeout for the requests to the easymobile API can be set on class initialization or by setting the `EASYMOBILE_TIMEOUT` environmental variable.
 
 ### Account Operations
 
