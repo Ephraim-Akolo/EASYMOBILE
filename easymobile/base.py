@@ -4,6 +4,8 @@ from . import exceptions
 from .mocked import MockedRequests
 
 API_KEY = os.getenv('EASYMOBILE_API_KEY')
+TIMEOUT = os.getenv('EASYMOBILE_TIMEOUT')
+
 
 class EasyBase:
     """
@@ -22,8 +24,8 @@ class EasyBase:
         """
         Initialize the EasyB2B object.
         """
-        if timeout:
-            self.timeout = timeout
+        if timeout or TIMEOUT:
+            self.timeout = timeout or float(TIMEOUT)
 
         self.req_session = requests.session()
         self.req_session.headers['Content-Type'] = 'application/json'
